@@ -1,6 +1,4 @@
 function App() {
-  
-
   return (
     <div>
       <h1>Search movies here:)</h1>
