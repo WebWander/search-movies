@@ -32,7 +32,7 @@ jobs:
       - name: Build frontend
         run: |
           cd frontend
-          npm run build:frontend
+          npm run build
 
       
       - name: Deploy frontend
