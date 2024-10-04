@@ -1,9 +1,10 @@
-function App() {
+import HomePage from "./components/HomePage"
+
+export default function App() {
   return (
-    <div>
-      <h1>Search movies here:)</h1>
+    <div className="">
+      <HomePage />
     </div>
   )
 }
 
-export default App
