@@ -1,5 +1,6 @@
 import Header from "./Header";
 import TrendingMovies from "./TrendingMovies";
+import GenreMovieList from "./GenreMovieList";
 
 export default function HomePage() {
   return (
@@ -7,6 +8,9 @@ export default function HomePage() {
       <Header />
       <div className="w-full max-w-4xl">
         <TrendingMovies />
+      </div>
+      <div className="w-full max-w-4xl">
+        <GenreMovieList />
       </div>
     </div>
   )
