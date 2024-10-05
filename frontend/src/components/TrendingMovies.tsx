@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Carousel styles
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const TrendingMovies = () => {
   interface Movie {
@@ -53,12 +53,13 @@ const TrendingMovies = () => {
           <div key={movie._id} className="relative">
             <img
               src={movie.thumbnail}
-              alt={movie.title}
+              alt={`Thumbnail of ${movie.title}`}  
               className="min-w-full md:h-[310px] object-cover
               object-left-top mr-5 rounded-md hover:border-[4px]
               border-gray-400 transition-all duration-100 ease-in-out" 
             />
-            <p className="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center p-2 rounded-b-lg text-lg">
+            {/* Add data-testid for unique identification */}
+            <p data-testid={`movie-title-${movie._id}`} className="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center p-2 rounded-b-lg text-lg">
               {movie.title}
             </p>
           </div>
