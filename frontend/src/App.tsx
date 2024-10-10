@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
+import MovieView from './pages/MovieView';
 import Categories from './pages/Categories';
 import Bookmarked from './pages/Bookmarked';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/bookmarked" element={<Bookmarked />} />
+          <Route path="/movie/:id" element={<MovieView />} />
           {/* Redirect all unknown paths to Home */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
