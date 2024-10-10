@@ -84,23 +84,6 @@ function getRandomMovies(moviesArray, num) {
 }
 
 
-app.get('/api/movies/:id', async (req, res) => {
-  try {
-      const movieId = req.params.id; // This should be an ObjectId
-      const movie = await Movie.findById(movieId);
-      if (!movie) {
-          return res.status(404).json({ message: 'Movie not found' });
-      }
-      res.json(movie);
-  } catch (error) {
-      console.error('Error fetching movie by ID:', error);
-      res.status(500).json({ message: error.message });
-  }
-});
-
-
-
-
 
 // Get movies by genre
 app.get('/api/movies/genre/:genre', async (req, res) => {
@@ -121,6 +104,48 @@ app.get('/api/movies/genre/:genre', async (req, res) => {
   } catch (error) {
     console.error(error); // Log the error for debugging
     res.status(500).json({ message: "An error occurred while fetching movies." });
+  }
+});
+
+
+app.get('/api/movies/genres', async (req, res) => {
+  try {
+    // Fetch movies from the database
+    const movies = await Movie.find(); // Ensure Movie is properly defined
+
+    if (!movies || movies.length === 0) {
+      return res.status(404).json({ message: "No movies found." });
+    }
+
+    // Get all genres by splitting the genre strings
+    const genres = movies.flatMap(movie => movie.genre.split(', '));
+
+    // Remove duplicates by converting the array to a Set and then back to an array
+    const uniqueGenres = [...new Set(genres.map(genre => genre.toLowerCase()))];
+
+    if (uniqueGenres.length === 0) {
+      return res.status(404).json({ message: "No genres found." });
+    }
+
+    res.json(uniqueGenres);
+  } catch (error) {
+    console.error("Error fetching genres:", error);
+    res.status(500).json({ message: "An error occurred while fetching genres." });
+  }
+});
+
+
+app.get('/api/movies/:id', async (req, res) => {
+  try {
+      const movieId = req.params.id;
+      const movie = await Movie.findById(movieId);
+      if (!movie) {
+          return res.status(404).json({ message: 'Movie not found' });
+      }
+      res.json(movie);
+  } catch (error) {
+      console.error('Error fetching movie by ID:', error);
+      res.status(500).json({ message: error.message });
   }
 });
 
