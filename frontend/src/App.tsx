@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
+import Categories from './pages/Categories';
+import Bookmarked from './pages/Bookmarked';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 const App = () => {
@@ -35,6 +37,13 @@ const App = () => {
             >
               Categories
             </Link>
+            <Link
+              to="/bookmarked"
+              className="block px-4 py-2 text-center text-white hover:bg-gray-700 md:hover:bg-transparent md:hover:text-gray-400 transition duration-300 md:inline-block"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Bookmarked
+            </Link>
           </div>
         </div>
       </nav>
@@ -44,7 +53,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/movie/:id" element={<MovieView />} />
+          <Route path="/bookmarked" element={<Bookmarked />} />
           {/* Redirect all unknown paths to Home */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
