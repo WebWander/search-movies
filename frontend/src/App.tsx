@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import MovieView from './pages/MovieView';
+import Categories from './pages/Categories';
+import Bookmarked from './pages/Bookmarked';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 const App = () => {
