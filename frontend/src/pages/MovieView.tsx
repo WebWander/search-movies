@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
+const apiUrl = import.meta.env.VITE_API_URL;
+
 
 interface Movie {
   _id: string;
@@ -24,7 +26,7 @@ const MovieView = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/movies/${id}`);
+        const response = await axios.get(`${apiUrl}/api/movies/${id}`);
         setMovie(response.data);
       } catch (err) {
         console.error('Error fetching movie details:', err);
@@ -36,7 +38,7 @@ const MovieView = () => {
   
     const checkBookmarkStatus = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/bookmarks/check/${id}`);
+        const response = await axios.get(`${apiUrl}/api/bookmarks/check/${id}`);
         setIsBookmarked(response.data.isBookmarked);
       } catch (err) {
         console.error('Error checking bookmark status:', err);
@@ -56,8 +58,8 @@ const MovieView = () => {
   
     try {
       const response = isBookmarked 
-        ? await axios.post(`http://localhost:3000/api/bookmarks/remove`, { movie: movie._id }) 
-        : await axios.post(`http://localhost:3000/api/bookmarks/add`, { movie: movie._id });
+        ? await axios.post(`${apiUrl}/api/bookmarks/remove`, { movie: movie._id }) 
+        : await axios.post(`${apiUrl}/api/bookmarks/add`, { movie: movie._id });
       
       if (response.status === 201 || response.status === 200) {
         setIsBookmarked(!isBookmarked); // Toggle state based on removal success
