@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(cors({
-    origin: 'http://localhost:5174' 
+    origin: 'https://search-movies-1.onrender.com/' 
   }));
 app.use(express.json());
 
