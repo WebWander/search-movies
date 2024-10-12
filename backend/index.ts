@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 app.use(cors({
   origin: function (origin, callback) {
       const allowedOrigins = [
-          'https://search-movies-1.onrender.com', 
+          'https://search-movies-1.onrender.com/', 
           'http://localhost:5173', 
       ];
       
