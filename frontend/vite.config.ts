@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     outDir: 'dist', 
   },
-  base: '/search-movies/',
+  base: '/',
   test: {
     ...configDefaults,
     globals: true,
