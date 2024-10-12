@@ -1,0 +1,3 @@
+# Set the MIME type for JavaScript files
+/*.js
+  Content-Type: application/javascript
