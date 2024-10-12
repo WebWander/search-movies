@@ -4,15 +4,29 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import movieRoutes from './src/routes/movieRoutes'; 
 import genreRoutes from './src/routes/genreRoutes';
-import bookmarkRoutes from './src/routes/bookmarkRoutes';
+import bookmarkRoutes from './src/routes/bookmarkRoutes'
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(cors({
-    origin: 'https://search-movies-1.onrender.com/' 
-  }));
+  origin: function (origin, callback) {
+      const allowedOrigins = [
+          'https://search-movies-1.onrender.com', 
+          'http://localhost:5173', 
+      ];
+      
+     
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.indexOf(origin) !== -1) {
+          callback(null, true);
+      } else {
+          callback(new Error('Not allowed by CORS'));
+      }
+  },
+}));
 app.use(express.json());
 
 
