@@ -10,23 +10,21 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.use(cors({
+app.options('*', cors({
   origin: function (origin, callback) {
       const allowedOrigins = [
           'https://search-movies-1.onrender.com', 
-          'http://localhost:5173', 
+          'http://localhost:5173',
       ];
-      
-     
       if (!origin) return callback(null, true);
-      
-      if (allowedOrigins.indexOf(origin) !== -1) {
+      if (allowedOrigins.includes(origin)) {
           callback(null, true);
       } else {
           callback(new Error('Not allowed by CORS'));
       }
-  },
+  }
 }));
+
 app.use(express.json());
 
 
