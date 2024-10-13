@@ -11,14 +11,26 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
+const allowedOrigins = ['https://movieflex1.netlify.app', 'http://localhost:5173'];
+
 const corsOptions = {
-  origin: 'https://movieflex1.netlify.app', // replace with your Netlify domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // specify allowed methods if needed
-  credentials: true // if your API uses cookies or HTTP authentication
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+  preflightContinue: true, // allow preflight responses
+  optionsSuccessStatus: 204 // some legacy browsers choke on 204
 };
 
 app.use(cors(corsOptions));
 
+// Automatically handle OPTIONS requests for CORS
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
