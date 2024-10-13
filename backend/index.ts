@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path'
 import movieRoutes from './src/routes/movieRoutes'; 
 import genreRoutes from './src/routes/genreRoutes';
 import bookmarkRoutes from './src/routes/bookmarkRoutes'
@@ -32,9 +33,12 @@ app.use('/api/genres', genreRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 
-// Root route handler for GET requests to '/'
-app.get('/', (req, res) => {
-  res.send('Welcome to the Movie API'); // Customize this message as needed
+// Serve static files from the Vite build output directory
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all route to serve the frontend's index.html on unmatched routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 
