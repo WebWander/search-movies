@@ -16,6 +16,15 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/setUpTests.ts', 
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://search-movies-8a15.onrender.com',
+        changeOrigin: true,
+        secure: true
+      }
+    }
+  }
 })
 
 
