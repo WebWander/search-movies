@@ -25,7 +25,7 @@ const Categories: React.FC = () => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const response = await axios.get(`https://flex-movies.onrender.com//api/movies`); 
+        const response = await axios.get(`https://flex-movies.onrender.com/api/movies`); 
         const allMovies = response.data;
 
         // Extract unique genres from the movies
@@ -51,7 +51,7 @@ const Categories: React.FC = () => {
       setError(null);
       const fetchMoviesByGenre = async () => {
         try {
-          const response = await axios.get(`https://flex-movies.onrender.com//api/genres/genre/${selectedGenre}`);
+          const response = await axios.get(`https://flex-movies.onrender.com/api/genres/genre/${selectedGenre}`);
           setMovies(response.data);
         } catch (err) {
           console.error('Error fetching movies by genre:', err);
