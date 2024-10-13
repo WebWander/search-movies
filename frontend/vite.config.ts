@@ -19,7 +19,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://search-movies-8a15.onrender.com',
+        target: 'https://flex-movies.onrender.com/',
         changeOrigin: true,
         secure: true
       }

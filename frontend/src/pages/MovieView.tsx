@@ -17,7 +17,9 @@ interface Movie {
 }
 
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = 'https://flex-movies.onrender.com'
+
+
 
 const MovieView = () => {
   const { id } = useParams<{ id: string }>();
@@ -28,6 +30,7 @@ const MovieView = () => {
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
+     console.log('API URL:', process.env.REACT_APP_API_URL);
       try {
         const response = await axios.get(`${apiUrl}/api/movies/${id}`);
         setMovie(response.data);

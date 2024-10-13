@@ -15,8 +15,7 @@ interface Movie {
   isTrending: boolean;
 }
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
+const apiUrl = 'https://flex-movies.onrender.com'
 const Bookmarked: React.FC = () => {
   const [bookmarkedMovies, setBookmarkedMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

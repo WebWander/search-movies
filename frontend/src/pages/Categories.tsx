@@ -4,7 +4,7 @@ import MovieThumbnail from '../components/MovieThumbnail';
 
 
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = 'https://flex-movies.onrender.com'
 
 const Categories: React.FC = () => {
   const [genres, setGenres] = useState<string[]>([]);
