@@ -17,19 +17,13 @@ const allowedOrigins = [
   'http://localhost:3000' // Local Node Express backend
 ];
 
-app.use((req, res, next) => {
-  console.log(`Request Origin: ${req.headers.origin}`);
-  next();
-});
 
-app.use(cors());
-
+app.use(cors({
+  origin: allowedOrigins,
+}));
 
 app.use(express.json());
 
-app.get('/test', (req, res) => {
-  res.send('Test route works');
-});
 
 
 
@@ -37,6 +31,11 @@ app.get('/test', (req, res) => {
 app.use('/api/genres', genreRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
+
+// Root route handler for GET requests to '/'
+app.get('/', (req, res) => {
+  res.send('Welcome to the Movie API'); // Customize this message as needed
+});
 
 
 mongoose
