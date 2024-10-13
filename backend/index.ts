@@ -14,7 +14,6 @@ app.options('*', cors({
   origin: function (origin, callback) {
       const allowedOrigins = [
           'https://search-movies-1.onrender.com', 
-          'http://localhost:5173',
       ];
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
