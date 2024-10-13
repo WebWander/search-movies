@@ -18,17 +18,9 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-      console.log('Request from origin:', origin); // Log the origin for each request
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-          callback(null, true);
-      } else {
-          console.error('CORS error: Origin not allowed', origin);
-          callback(new Error('Not allowed by CORS'));
-      }
-  }
+  origin: '*' // Allow requests from any origin
 }));
+
 
 
 app.use(express.json());
