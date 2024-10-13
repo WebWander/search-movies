@@ -15,7 +15,8 @@ interface Movie {
   isTrending: boolean;
 }
 
-const apiUrl = 'https://flex-movies.onrender.com'
+// const apiUrl = 'http://localhost:3000';
+
 const Bookmarked: React.FC = () => {
   const [bookmarkedMovies, setBookmarkedMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -24,7 +25,7 @@ const Bookmarked: React.FC = () => {
   useEffect(() => {
     const fetchBookmarkedMovies = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/bookmarks`);
+        const response = await axios.get(`https://flex-movies.onrender.com/api/bookmarks`);
         setBookmarkedMovies(response.data);
       } catch (err) {
         console.error('Error fetching bookmarked movies:', err);
@@ -39,7 +40,7 @@ const Bookmarked: React.FC = () => {
 
   const removeBookmark = async (movieId: string) => {
     try {
-      const response = await axios.post(`${apiUrl}/api/bookmarks/remove`, { movie: movieId });
+      const response = await axios.post(`https://flex-movies.onrender.com/api/bookmarks/remove`, { movie: movieId });
       if (response.status === 200) {
         setBookmarkedMovies(prevMovies => prevMovies.filter(movie => movie._id !== movieId));
       } else {

@@ -4,7 +4,8 @@ import Carousel from '../components/Carousel';
 import SearchBar from '../components/SearchBar';
 
 
-const apiUrl = 'https://flex-movies.onrender.com'
+// const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
 const Home = () => {
   interface Movie {
     id: number;
@@ -19,7 +20,7 @@ const Home = () => {
     const fetchMovies = async () => {
       console.log('API URL:', process.env.REACT_APP_API_URL);
       try {
-        const response = await axios.get(`${apiUrl}/api/movies`);
+        const response = await axios.get(`$https://flex-movies.onrender.com/api/movies`);
         setMovies(response.data);
       } catch (error) {
         console.error(error);
