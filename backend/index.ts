@@ -11,17 +11,14 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-const allowedOrigins = [
-  'https://search-movies-1.onrender.com', // Frontend URL on Render
-  'https://flex-movies.onrender.com/', // Backend URL on Render
-  'http://localhost:5173', // Local Vite frontend
-  'http://localhost:3000' // Local Node Express backend
-];
+const corsOptions = {
+  origin: 'https://movieflex1.netlify.app', // replace with your Netlify domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // specify allowed methods if needed
+  credentials: true // if your API uses cookies or HTTP authentication
+};
 
+app.use(cors(corsOptions));
 
-app.use(cors({
-  origin: allowedOrigins,
-}));
 
 app.use(express.json());
 
