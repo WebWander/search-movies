@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 
 const allowedOrigins = [
   'https://search-movies-1.onrender.com', // Frontend URL on Render
-  'https://search-movies-8a15.onrender.com', // Backend URL on Render
+  'https://flex-movies.onrender.com/', // Backend URL on Render
   'http://localhost:5173', // Local Vite frontend
   'http://localhost:3000' // Local Node Express backend
 ];
