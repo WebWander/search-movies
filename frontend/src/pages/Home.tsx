@@ -4,7 +4,7 @@ import Carousel from '../components/Carousel';
 import SearchBar from '../components/SearchBar';
 
 
-
+const apiUrl = process.env.REACT_APP_API_URL;
 const Home = () => {
   interface Movie {
     id: number;
@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(`https://search-movies-8a15.onrender.com/api/movies`);
+        const response = await axios.get(`${apiUrl}/api/movies`);
         setMovies(response.data);
       } catch (error) {
         console.error(error);
