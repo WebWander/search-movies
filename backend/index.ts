@@ -33,12 +33,20 @@ app.use('/api/genres', genreRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 
-// Serve static files from the Vite build output directory
-app.use(express.static(path.join(__dirname, 'dist')));
+const distPath = path.resolve(__dirname, 'dist');
+console.log(`Serving static files from: ${distPath}`);
+app.use(express.static(distPath));
 
 // Catch-all route to serve the frontend's index.html on unmatched routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  const indexPath = path.resolve(distPath, 'index.html');
+  console.log(`Attempting to serve file: ${indexPath}`);
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error("Error serving index.html:", err);
+      res.status(404).send("File not found.");
+    }
+  });
 });
 
 
