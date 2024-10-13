@@ -10,13 +10,16 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.options('*', cors({
+const allowedOrigins = [
+  'https://search-movies-1.onrender.com', // Frontend URL on Render
+  'https://search-movies-8a15.onrender.com', // Backend URL on Render
+  'http://localhost:5173', // Local Vite frontend
+  'http://localhost:3000' // Local Node Express backend
+];
+
+app.use(cors({
   origin: function (origin, callback) {
-      const allowedOrigins = [
-          'https://search-movies-1.onrender.com', 
-          'https://localhost:5173'
-      ];
-      if (!origin) return callback(null, true);
+      if (!origin) return callback(null, true); // Allow requests with no origin (like mobile apps, curl, Postman)
       if (allowedOrigins.includes(origin)) {
           callback(null, true);
       } else {
