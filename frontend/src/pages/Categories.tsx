@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MovieThumbnail from '../components/MovieThumbnail';
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 const Categories: React.FC = () => {
   const [genres, setGenres] = useState<string[]>([]);
@@ -10,7 +10,7 @@ const Categories: React.FC = () => {
     _id: string;
     title: string;
     genre: string;
-    // Add other relevant fields here
+    
   }
 
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -21,7 +21,7 @@ const Categories: React.FC = () => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/movies`); 
+        const response = await axios.get(`http://localhost:3000/api/movies`); 
         const allMovies = response.data;
 
         // Extract unique genres from the movies
@@ -47,7 +47,7 @@ const Categories: React.FC = () => {
       setError(null);
       const fetchMoviesByGenre = async () => {
         try {
-          const response = await axios.get(`${apiUrl}/api/genres/genre/${selectedGenre}`);
+          const response = await axios.get(`http://localhost:3000/api/genres/genre/${selectedGenre}`);
           setMovies(response.data);
         } catch (err) {
           console.error('Error fetching movies by genre:', err);

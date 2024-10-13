@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Carousel from '../components/Carousel';
 import SearchBar from '../components/SearchBar';
-const apiUrl = import.meta.env.VITE_API_URL;
+
+
 
 const Home = () => {
   interface Movie {
@@ -17,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/movies`);
+        const response = await axios.get(`http://localhost:3000/api/movies`);
         setMovies(response.data);
       } catch (error) {
         console.error(error);
