@@ -27,7 +27,7 @@ const MovieView = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const response = await axios.get(`/api/movies/${id}`);
+        const response = await axios.get(`https://search-movies-8a15.onrender.com/api/movies/${id}`);
         setMovie(response.data);
       } catch (err) {
         console.error('Error fetching movie details:', err);
@@ -39,7 +39,7 @@ const MovieView = () => {
   
     const checkBookmarkStatus = async () => {
       try {
-        const response = await axios.get(`/api/bookmarks/check/${id}`);
+        const response = await axios.get(`https://search-movies-8a15.onrender.com/api/bookmarks/check/${id}`);
         setIsBookmarked(response.data.isBookmarked);
       } catch (err) {
         console.error('Error checking bookmark status:', err);
@@ -59,8 +59,8 @@ const MovieView = () => {
   
     try {
       const response = isBookmarked 
-        ? await axios.post(`/api/bookmarks/remove`, { movie: movie._id }) 
-        : await axios.post(`/api/bookmarks/add`, { movie: movie._id });
+        ? await axios.post(`https://search-movies-8a15.onrender.com/api/bookmarks/remove`, { movie: movie._id }) 
+        : await axios.post(`https://search-movies-8a15.onrender.com/api/bookmarks/add`, { movie: movie._id });
       
       if (response.status === 201 || response.status === 200) {
         setIsBookmarked(!isBookmarked); // Toggle state based on removal success

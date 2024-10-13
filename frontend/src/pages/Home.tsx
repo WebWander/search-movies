@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(`/api/movies`);
+        const response = await axios.get(`https://search-movies-8a15.onrender.com/api/movies`);
         setMovies(response.data);
       } catch (error) {
         console.error(error);
