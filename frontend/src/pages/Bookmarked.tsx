@@ -23,7 +23,7 @@ const Bookmarked: React.FC = () => {
   useEffect(() => {
     const fetchBookmarkedMovies = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/bookmarks`);
+        const response = await axios.get(`/api/bookmarks`);
         setBookmarkedMovies(response.data);
       } catch (err) {
         console.error('Error fetching bookmarked movies:', err);
@@ -38,7 +38,7 @@ const Bookmarked: React.FC = () => {
 
   const removeBookmark = async (movieId: string) => {
     try {
-      const response = await axios.post(`http://localhost:3000/api/bookmarks/remove`, { movie: movieId });
+      const response = await axios.post(`/api/bookmarks/remove`, { movie: movieId });
       if (response.status === 200) {
         setBookmarkedMovies(prevMovies => prevMovies.filter(movie => movie._id !== movieId));
       } else {
