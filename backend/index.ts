@@ -27,11 +27,8 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get('/api/test-cors', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.json({ message: 'CORS headers applied directly on this route.' });
+app.get('/test', (req, res) => {
+  res.send('Test route works');
 });
 
 
