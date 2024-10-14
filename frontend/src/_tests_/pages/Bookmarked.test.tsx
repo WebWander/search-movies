@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { MemoryRouter } from 'react-router-dom'; // Import MemoryRouter
+import { MemoryRouter } from 'react-router-dom';
 import Bookmarked from '../../pages/Bookmarked';
 
 vi.mock('axios');
@@ -43,7 +43,6 @@ describe('Bookmarked Component', () => {
     mockedAxios.get.mockResolvedValueOnce({ data: mockedMovies });
     mockedAxios.post.mockResolvedValueOnce({ status: 200 });
 
-   
     render(
       <MemoryRouter>
         <Bookmarked />
@@ -63,9 +62,13 @@ describe('Bookmarked Component', () => {
     // Check that axios post request was called with correct parameters
     await waitFor(() => {
       expect(mockedAxios.post).toHaveBeenCalledWith(
-        'http://localhost:3000/api/bookmarks/remove',
+        '/api/bookmarks/remove', // use relative URL if component uses relative URL
         { movie: '1' }
       );
+    });
+
+    // Ensure the movie is removed from the DOM after the async update
+    await waitFor(() => {
       expect(screen.queryByText('Movie One')).not.toBeInTheDocument();
     });
   });

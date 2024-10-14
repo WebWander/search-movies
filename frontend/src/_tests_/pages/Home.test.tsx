@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import Home from '../../pages/Home';
 import axios from 'axios';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 
 // Mock axios
@@ -31,13 +31,15 @@ describe('Home Component', () => {
 
     // Check that the API call was made to fetch movies
     await waitFor(() => {
-      expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:3000/api/movies');
+      expect(mockedAxios.get).toHaveBeenCalledWith('/api/movies');
     });
 
-    // Validate the trending section
+    // Validate that the trending movies are displayed
     await waitFor(() => {
-      const trendingMovie = screen.getByText('Inception');
-      expect(trendingMovie).toBeInTheDocument();
+      const trendingMovie1 = screen.getByText('Inception');
+      const trendingMovie2 = screen.getByText('The Dark Knight');
+      expect(trendingMovie1).toBeInTheDocument();
+      expect(trendingMovie2).toBeInTheDocument();
     });
   });
 
@@ -52,13 +54,15 @@ describe('Home Component', () => {
 
     // Check that the API call was made
     await waitFor(() => {
-      expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:3000/api/movies');
+      expect(mockedAxios.get).toHaveBeenCalledWith('/api/movies');
     });
 
-    // Validate the recommended section
+    // Validate that the recommended movies are displayed
     await waitFor(() => {
-      const recommendedMovie = screen.getByText('Interstellar');
-      expect(recommendedMovie).toBeInTheDocument();
+      const recommendedMovie1 = screen.getByText('Interstellar');
+      const recommendedMovie2 = screen.getByText('Dunkirk');
+      expect(recommendedMovie1).toBeInTheDocument();
+      expect(recommendedMovie2).toBeInTheDocument();
     });
   });
 });

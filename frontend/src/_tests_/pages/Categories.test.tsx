@@ -14,33 +14,35 @@ describe('Categories Component', () => {
   });
 
   it('fetches and displays movies by genre', async () => {
-    
+    // Mock response for fetching genres
     mockedAxios.get.mockResolvedValueOnce({
       data: [
         { _id: '1', title: 'Movie1', genre: 'Action' },
         { _id: '2', title: 'Movie2', genre: 'Drama' },
       ],
     });
-  
-    // Mock response for fetching movies by genre
-    mockedAxios.get.mockResolvedValueOnce({
-      data: [{ _id: '1', title: 'Movie1', genre: 'Action' }],
-    });
-  
+
     render(
       <MemoryRouter>
         <Categories />
       </MemoryRouter>
     );
-  
+
     const actionButton = await screen.findByText('Action');
+    
+    // Mock response for fetching movies in the Action genre
+    mockedAxios.get.mockResolvedValueOnce({
+      data: [{ _id: '1', title: 'Movie1', genre: 'Action' }],
+    });
+
     await userEvent.click(actionButton);
-  
-    // Verifying that the API call has been made with the correct genre
-    await waitFor(() => expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:3000/api/genres/genre/Action'));
-  
+
+    // Adjust to check relative URL if using relative URLs in component
+    await waitFor(() =>
+      expect(mockedAxios.get).toHaveBeenCalledWith('/api/genres/genre/Action')
+    );
+
     const movieTitle = await screen.findByText('Movie1');
     expect(movieTitle).toBeInTheDocument();
   });
-  
 });
