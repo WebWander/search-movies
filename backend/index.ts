@@ -9,28 +9,17 @@ import bookmarkRoutes from './src/routes/bookmarkRoutes'
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
-const allowedOrigins = ['https://movieflex1.netlify.app', 'http://localhost:5173'];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true,
-  preflightContinue: true, // allow preflight responses
-  optionsSuccessStatus: 204 // some legacy browsers choke on 204
-};
+const allowedOrigins = process.env.NODE_ENV === 'production'
+    ? 'https://movieflex1.netlify.app' // Production URL
+    : 'http://localhost:5173';          // Local development URL for Vite
 
-app.use(cors(corsOptions));
+app.use(cors({
+    origin: allowedOrigins
+}));
 
-// Automatically handle OPTIONS requests for CORS
-app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
@@ -45,10 +34,11 @@ app.use('/api/genres', genreRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 
-const distPath = path.resolve(__dirname, 'dist');
-console.log(`Serving static files from: ${distPath}`);
-app.use(express.static(distPath));
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 
 mongoose
