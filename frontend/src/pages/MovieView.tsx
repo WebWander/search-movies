@@ -17,7 +17,8 @@ interface Movie {
 }
 
 
-// const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 
 
 
@@ -31,9 +32,9 @@ const MovieView = () => {
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
-     console.log('API URL:', process.env.REACT_APP_API_URL);
+
       try {
-        const response = await axios.get(`https://flex-movies.onrender.com/api/movies/${id}`);
+        const response = await axios.get(`${apiUrl}/movies/${id}`);
         setMovie(response.data);
       } catch (err) {
         console.error('Error fetching movie details:', err);
@@ -45,7 +46,7 @@ const MovieView = () => {
   
     const checkBookmarkStatus = async () => {
       try {
-        const response = await axios.get(`https://flex-movies.onrender.com/api/bookmarks/check/${id}`);
+        const response = await axios.get(`${apiUrl}/bookmarks/check/${id}`);
         setIsBookmarked(response.data.isBookmarked);
       } catch (err) {
         console.error('Error checking bookmark status:', err);
@@ -65,8 +66,8 @@ const MovieView = () => {
   
     try {
       const response = isBookmarked 
-        ? await axios.post(`https://flex-movies.onrender.com/api/bookmarks/remove`, { movie: movie._id }) 
-        : await axios.post(`https://flex-movies.onrender.com/api/bookmarks/add`, { movie: movie._id });
+        ? await axios.post(`${apiUrl}/bookmarks/remove`, { movie: movie._id }) 
+        : await axios.post(`${apiUrl}/bookmarks/add`, { movie: movie._id });
       
       if (response.status === 201 || response.status === 200) {
         setIsBookmarked(!isBookmarked); // Toggle state based on removal success

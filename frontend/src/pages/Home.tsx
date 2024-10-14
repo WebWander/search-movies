@@ -4,7 +4,8 @@ import Carousel from '../components/Carousel';
 import SearchBar from '../components/SearchBar';
 
 
-// const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 
 const Home = () => {
   interface Movie {
@@ -18,9 +19,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      console.log('API URL:', process.env.REACT_APP_API_URL);
+      console.log('API URL:', import.meta.env.VITE_API_BASE_URL);
       try {
-        const response = await axios.get(`$https://flex-movies.onrender.com/api/movies`);
+        const response = await axios.get(`${apiUrl}/movies`);
         setMovies(response.data);
       } catch (error) {
         console.error(error);

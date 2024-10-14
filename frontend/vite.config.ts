@@ -16,15 +16,15 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/setUpTests.ts', 
   },
-  // server: {
-  //   proxy: {
-  //     '/api': {
-  //       target: 'https://flex-movies.onrender.com/',
-  //       changeOrigin: true,
-  //       secure: true
-  //     }
-  //   }
-  // }
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  }
 })
 
 
