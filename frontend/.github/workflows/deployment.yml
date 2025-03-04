@@ -1,8 +1,8 @@
 name: Github Actions Deployment
 on: 
   push:
-    branches:
-      - main
+    paths:
+      - 'frontend/**'
 jobs:
   test:
     runs-on: ubuntu-latest
